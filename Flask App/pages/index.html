@@ -1,0 +1,34 @@
+<!doctype html>
+<title>HeadCounter</title>
+<h1>Welcome to Headcounter! We take a crowd image from you and tell you how many people we see!</h1>
+
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<h3> It looks like this image contains {{prediction}} people. </h3>
+	</div>
+	<div>
+		<img src="{{ 'static/' + filename }}">
+	</div>
+{% endif %}
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
